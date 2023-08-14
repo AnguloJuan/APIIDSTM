@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moveTo, lineTo y stroke</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="400px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    //dibujo de lineas
+    ctx.fillStyle = "rgb(255, 150, 255, 0.8)";
+    ctx.beginPath();
+    ctx.moveTo(200, 60);
+    ctx.lineTo(230, 160);
+    ctx.lineTo(300, 200);
+    ctx.fill();
+    ctx.closePath();
+    
+    ctx.strokeStyle = "#CD0009";
+    ctx.beginPath();
+    ctx.moveTo(200, 40);
+    ctx.lineTo(270, 140);
+    ctx.stroke();
+</script>
+
+</html>
