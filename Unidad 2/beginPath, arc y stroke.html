@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beginPath, arc y stroke</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#7D88E5";
+    ctx.fillRect(0, 0, 80, 80);
+    ctx.fillStyle = "#CD0009";
+    ctx.fillRect(60, 60, 80, 80);
+    ctx.fillStyle = "rgb(255, 150, 255, 0.8)";
+    ctx.fillRect(120, 120, 80, 80, 50);
+    
+    //dibujo de lineas
+    ctx.strokeStyle = "#7D88E5";
+    ctx.beginPath();
+    ctx.moveTo(285, 10);
+    ctx.lineTo(315, 65);
+    ctx.lineTo(225, 65);
+    ctx.fill();
+    ctx.closePath();
+    
+    ctx.beginPath();
+    ctx.moveTo(322, 65);
+    ctx.lineTo(372, 172);
+    ctx.stroke();
+    ctx.closePath();
+    
+    //dibujo de curvas
+    ctx.fillStyle = "#11D411";
+    ctx.strokeStyle = "#000"
+    ctx.beginPath();
+    ctx.arc(260, 240, 50, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    
+    ctx.beginPath();
+    ctx.arc(380, 240, 50, 0, 2 * Math.PI);
+    ctx.strokeStyle = "#11D411"
+    ctx.stroke();
+    ctx.closePath();
+</script>
+
+</html>
