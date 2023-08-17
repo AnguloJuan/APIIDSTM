@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beginPath, arc y stroke</title>
+</head>
+
+<body>
+    <img src="toyJoya.png" alt="toyJoya" id="toyJoya">
+    <br>
+    <button onclick="drawImage()">Dibujar</button>
+    <br>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000; background-color: #E7E9EB;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+
+<script>
+    function drawImage() {
+        const img = document.getElementById("toyJoya");
+        // dibujo de texto
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+    }
+</script>
+
+</html>
