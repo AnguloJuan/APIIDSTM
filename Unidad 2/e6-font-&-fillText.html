@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beginPath, arc y stroke</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000; background-color: #E7E9EB;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    // dibujo de texto
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    ctx.beginPath();
+    ctx.font = "20px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+    ctx.fillText("Como me dijo un amigo",150, 40);
+    ctx.font = "38px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+    ctx.fillText("El LoL es peor que las paj*s!", 20, 100);
+    
+    ctx.font = "80px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+    // Fill with gradient
+    ctx.fillStyle = "black";
+    ctx.fillText(":D", 202, 202);
+    ctx.fillStyle = "white";
+    ctx.fillText(":D", 200, 200);
+    
+    
+    ctx.font = "20px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+    ctx.fillStyle = "black";
+    ctx.strokeText("Buenas noches~",180, 250);
+    ctx.closePath();
+</script>
+
+</html>
