@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+
+    canvas.addEventListener("click", (e) => {
+        //dibujo de curvas
+        ctx.fillStyle = "rgba(100,100,220,.8)";
+        ctx.strokeStyle = "#000"
+        ctx.beginPath();
+        ctx.arc(e.layerX, e.layerY, 20, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+    })
+
+</script>
+
+</html>
