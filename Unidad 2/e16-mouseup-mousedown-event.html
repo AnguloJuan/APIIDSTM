@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mousedown-mouseup</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    var color;
+    ctx.strokeStyle = "#000";
+    let figura;
+    let mousePressed;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (mousePressed) {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+    
+            if (figura) {
+                ctx.arc(e.layerX, e.layerY, 4, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.stroke();
+            } else {
+                ctx.fillRect(e.layerX, e.layerY, 8, 4);
+                ctx.strokeRect(e.layerX, e.layerY, 8, 8);
+            }
+    
+            ctx.closePath();
+            figura = !figura;
+            color = random_rgba();
+        }
+    });
+
+    canvas.addEventListener("mouseup", (e) => {
+        ctx.arc(e.layerX, e.layerY, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        mousePressed = !mousePressed;
+    })
+
+    canvas.addEventListener("mousedown", (e) => {
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.fillRect(e.layerX, e.layerY, 20, 20);
+        ctx.strokeRect(e.layerX, e.layerY, 20, 20);
+        ctx.closePath();
+        color = random_rgba();
+
+        mousePressed = !mousePressed;
+        mouseMovePaint(e);
+    });
+
+</script>
+
+</html>
