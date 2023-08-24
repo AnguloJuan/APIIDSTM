@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keydown</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    var color;
+    ctx.strokeStyle = "#000";
+    var x = 250, y = 150;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
+
+    document.addEventListener("keydown", (event) => {
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(255, 255, 255)";
+        ctx.fillRect(0, 0, 500, 300);
+        ctx.closePath();
+
+
+        ctx.beginPath();
+        ctx.fillStyle = color;
+
+        switch (event.keyCode) {
+            case 38://up
+                y -= 10
+                break;
+            case 37://right
+                x -= 10
+                break;
+            case 40://down
+                y += 10
+                break;
+            case 39://left
+                x += 10
+                break;
+        }
+
+        ctx.fillRect(x, y, 40, 40);
+        ctx.strokeRect(x, y, 40, 40);
+
+        color = random_rgba();
+        ctx.closePath();
+    });
+
+</script>
+
+</html>
