@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>avatar</title>
+</head>
+
+<body>
+    <br>
+    <button onclick="drawImage()">Dibujar</button>
+    <br>
+    <canvas id="myCanvas" width="1800px" height="500px" style="border:1px solid #000000; background-color: #E7E9EB;">
+        Your browser does not support the canvas tag.
+    </canvas>
+    <img src="kirby-con-un-cuchillo.jpg" alt="kirby-con-un-cuchillo" id="kirby-con-un-cuchillo">
+</body>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+
+    //image to compare
+    function drawImage() {
+        const img = document.getElementById("kirby-con-un-cuchillo");
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 1000, 0);
+    }
+    function drwBody() {
+        //face/body
+        grd = ctx.createRadialGradient(430, 180, 10, 415, 210, 110);
+        grd.addColorStop(0, "rgba(221,213,255)");
+        grd.addColorStop(0.3, "rgba(200,180,240)");
+        grd.addColorStop(0.8, "rgba(151,133,180)");
+        grd.addColorStop(1, "rgba(131,92,139)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(400, 250, 100, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        // eyes
+        //left
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(395, 240, 15, .7 * Math.PI, 1.3 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(377.2, 240, 15, -0.3 * Math.PI, .3 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        //right
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(422, 240, 15, .7 * Math.PI, 1.3 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(404.2, 240, 15, -0.3 * Math.PI, .3 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //mouth
+        //smile
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(400, 270, 15, .15 * Math.PI, .85 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        //left ¿cheek?
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(371.5, 278, 15, -.2 * Math.PI, .2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        //right ¿cheek?
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(428.5, 278, 15, .8 * Math.PI, 1.2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+        //lines in ¿cheeks?
+        //left lines
+        ctx.strokeStyle = "#000";
+        ctx.beginPath();
+        ctx.moveTo(365, 260);
+        ctx.lineTo(375, 260);
+        ctx.moveTo(365, 264);
+        ctx.lineTo(375, 264);
+        ctx.stroke();
+        ctx.closePath();
+        //right lines
+        ctx.strokeStyle = "#000";
+        ctx.beginPath();
+        ctx.moveTo(420, 260);
+        ctx.lineTo(430, 260);
+        ctx.moveTo(420, 264);
+        ctx.lineTo(430, 264);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    function drawArms() {
+        //left arm
+        grd = ctx.createRadialGradient(300, 220, 2, 288, 236, 36);
+        grd.addColorStop(0, "rgba(221,203,255)");
+        grd.addColorStop(0.3, "rgba(200,180,240)");
+        grd.addColorStop(0.8, "rgba(151,133,180)");
+        grd.addColorStop(1, "rgba(131,92,139)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(267, 246, 50, -.6 * Math.PI, .2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(292, 228, 50, .39 * Math.PI, 1.21 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //right arm
+        grd = ctx.createRadialGradient(540, 230, 2, 510, 260, 45);
+        grd.addColorStop(0, "rgba(221,203,255)");
+        grd.addColorStop(0.3, "rgba(200,180,240)");
+        grd.addColorStop(0.8, "rgba(151,133,180)");
+        grd.addColorStop(1, "rgba(131,92,139)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(500, 270, 50, -.8 * Math.PI, .09 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(525, 242, 47, .33 * Math.PI, 1.2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawBoots() {
+        //right boot
+        grd = ctx.createRadialGradient(500, 300, 2, 500, 310, 45);
+        grd.addColorStop(0, "rgba(119,12,28)");
+        grd.addColorStop(0.3, "rgba(104,13,28)");
+        grd.addColorStop(0.8, "rgba(85,15,26)");
+        grd.addColorStop(1, "rgba(59,22,29)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(476, 340, 48, -.9 * Math.PI, .066 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(486, 284, 75, .34 * Math.PI, 1 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        //left boot
+        grd = ctx.createRadialGradient(200, 300, 2, 200, 310, 45);
+        grd.addColorStop(0, "rgba(119,12,28)");
+        grd.addColorStop(0.3, "rgba(104,13,28)");
+        grd.addColorStop(0.8, "rgba(85,15,26)");
+        grd.addColorStop(1, "rgba(59,22,29)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(354, 340, 50, -1.27 * Math.PI, -0.2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(335, 324, 55, -0.1 * Math.PI, .58 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
+    function draKnife() {
+        //blade
+        grd = ctx.createLinearGradient(200, 300, 2, 200, 310, 45);
+        grd.addColorStop(0, "rgba(119,12,28)");
+        grd.addColorStop(0.3, "rgba(104,13,28)");
+        grd.addColorStop(0.8, "rgba(85,15,26)");
+        grd.addColorStop(1, "rgba(59,22,29)");
+        ctx.fillStyle = "#555";
+        ctx.beginPath();
+        ctx.moveTo(255, 50);
+        ctx.lineTo(262, 60);
+        ctx.lineTo(266, 70);
+        ctx.lineTo(268, 80);
+        ctx.lineTo(270, 90);
+        ctx.lineTo(275, 260);
+
+        ctx.lineTo(248, 260);
+        ctx.lineTo(242, 248);
+        ctx.lineTo(236, 244);
+
+        ctx.lineTo(225, 240);
+        ctx.lineTo(227, 130);
+        ctx.lineTo(231, 100);
+        ctx.lineTo(235, 86);
+        ctx.lineTo(245, 66);
+        ctx.fill();
+        ctx.closePath();
+
+        //base
+        ctx.fillStyle = "rgb(41,31,30)";
+        ctx.beginPath();
+        ctx.moveTo(275, 260);
+        ctx.lineTo(248, 260);
+        ctx.lineTo(248, 360);
+        ctx.lineTo(244, 376);
+        ctx.lineTo(250, 386);
+        ctx.lineTo(254, 390);
+        ctx.lineTo(265, 397);
+        ctx.lineTo(275, 393);
+        ctx.lineTo(280, 388);
+        ctx.fill();
+        ctx.closePath();
+    }
+    //order of drawing is important
+    drawArms();
+    draKnife();
+    drawBoots();
+    drwBody();
+
+    ctx.font = "60px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+    ctx.fillStyle = "black";
+    ctx.fillText("Peace was never an option", 82, 462);
+    ctx.fillStyle = "white";
+    ctx.fillText("Peace was never an option", 80, 460);
+</script>
+
+</html>
