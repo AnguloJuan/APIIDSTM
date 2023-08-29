@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paisaje</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000px" height="600px"
+        style="border:1px solid #000000; background-color: rgba(220, 220, 240, .7)">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+
+    //sos
+    let figura;
+    let mousePressed;
+    let color = 'rgba(200,200,200)';
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 235;
+        return 'rgba(' + o(r() * (s - 180) + 180) + ',' + o(r() * (s - 180) + 180) + ',' + o(r() * (s - 180) + 180) + ',' + r().toFixed(1) + ')';
+    }
+    canvas.addEventListener("mousemove", (e) => {
+        if (mousePressed) {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+
+            ctx.arc(e.layerX, e.layerY, 4, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.closePath();
+            color = random_rgba();
+        }
+    });
+    canvas.addEventListener("mouseup", (e) => {
+        mousePressed = !mousePressed;
+    })
+    canvas.addEventListener("mousedown", (e) => {
+        mousePressed = !mousePressed;
+        mouseMovePaint(e);
+    });
+
+    ctx.strokeStyle = "#000"
+    var grd;
+    //sol
+    grd = ctx.createRadialGradient(900, 20, 50, 900, 20, 150);
+    grd.addColorStop(0, "rgba(250,250,0, 1)");
+    grd.addColorStop(0.5, "rgba(250,250,20, 0.8)");
+    grd.addColorStop(1, "rgba(250,250,30, 0.1)");
+    ctx.beginPath();
+    ctx.fillStyle = grd;
+    ctx.arc(900, 20, 150, 0 * Math.PI, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.strokeStyle = "#000"
+    var grd;
+    //nube1
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(175,175,175,1)";
+    ctx.arc(205, 82, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(235, 102, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(205, 112, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(175, 102, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,255,255,1)";
+    ctx.arc(200, 80, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(230, 100, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(200, 110, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(170, 100, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    //nube2
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(175,175,175,1)";
+    ctx.arc(305, 42, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(355, 42, 34, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(335, 62, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(365, 62, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(395, 62, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(305, 72, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(275, 62, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,255,255,1)";
+    ctx.arc(300, 40, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(350, 40, 34, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(330, 60, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(360, 60, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(390, 60, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(300, 70, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(270, 60, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    
+
+    function dibujarPalma() {
+        //tronco
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,64,0)"
+        ctx.moveTo(800, 100);
+        ctx.lineTo(820, 405);
+        ctx.lineTo(805, 406.7);
+        ctx.lineTo(797, 408);
+        ctx.lineTo(790, 410);
+        ctx.lineTo(797, 100);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja derecha 3
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 110);
+        ctx.lineTo(800, 105);
+        ctx.lineTo(830, 100);
+        ctx.lineTo(850, 121);
+        ctx.lineTo(860, 135);
+        ctx.lineTo(860, 160);
+        ctx.lineTo(840, 135);
+        ctx.lineTo(825, 125);
+        ctx.lineTo(800, 110);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja derecha 2
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 105);
+        ctx.lineTo(830, 95);
+        ctx.lineTo(870, 101);
+        ctx.lineTo(880, 115);
+        ctx.lineTo(890, 155);
+        ctx.lineTo(860, 129);
+        ctx.lineTo(830, 115);
+        ctx.lineTo(800, 105);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja derecha 1
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 105);
+        ctx.lineTo(800, 100);
+        ctx.lineTo(830, 80);
+        ctx.lineTo(870, 86);
+        ctx.lineTo(890, 110);
+        ctx.lineTo(900, 150);
+        ctx.lineTo(860, 114);
+        ctx.lineTo(830, 110);
+        ctx.lineTo(800, 105);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja izquierda 3
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 110);
+        ctx.lineTo(800, 105);
+        ctx.lineTo(770, 100);
+        ctx.lineTo(750, 121);
+        ctx.lineTo(740, 135);
+        ctx.lineTo(744, 155);
+        ctx.lineTo(760, 135);
+        ctx.lineTo(775, 125);
+        ctx.lineTo(800, 110);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja izquierda 2
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 105);
+        ctx.lineTo(770, 95);
+        ctx.lineTo(730, 101);
+        ctx.lineTo(720, 115);
+        ctx.lineTo(710, 155);
+        ctx.lineTo(740, 129);
+        ctx.lineTo(770, 115);
+        ctx.lineTo(800, 105);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //hoja izquierda 1
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(128,224,0)"
+        ctx.moveTo(800, 105);
+        ctx.lineTo(800, 100);
+        ctx.lineTo(770, 80);
+        ctx.lineTo(730, 86);
+        ctx.lineTo(710, 110);
+        ctx.lineTo(700, 150);
+        ctx.lineTo(740, 114);
+        ctx.lineTo(770, 110);
+        ctx.lineTo(800, 105);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        //coco izquierdo
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(84,58,0)"
+        ctx.arc(794, 110, 9, 0 * Math.PI, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        //coco derecho
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(84,58,0)"
+        ctx.arc(804, 113, 9, 0 * Math.PI, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    //arena
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(230,240,20)"
+    ctx.arc(1000, 1350, 1000, 0 * Math.PI, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    //sombra
+    grd = ctx.createRadialGradient(802, 400, 1, 800, 430, 60);
+    grd.addColorStop(0, "rgba(0,0,0, .8)");
+    grd.addColorStop(1, "rgba(0,0,0, 0)");
+    ctx.beginPath();
+    ctx.fillStyle = grd;
+    ctx.arc(800, 420, 75, 0 * Math.PI, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+    dibujarPalma();
+
+    //toalla
+
+    //mar
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(100,100,250, 0.8)"
+    ctx.arc(0, 1950, 1500, 0 * Math.PI, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+</script>
+
+</html>
