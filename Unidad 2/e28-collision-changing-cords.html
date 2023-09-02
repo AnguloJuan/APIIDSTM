@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>requestAnimationFrame</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500px" height="300px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    var color;
+    ctx.strokeStyle = "#000";
+    var x = 250, y = 150, w = 40, h = 40;
+    var t_x = 400, t_y = 200, t_w = 40, t_h = 40;
+    var dir = 0;
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+    }
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
+
+    document.addEventListener("keydown", (e) => {
+        switch (event.keyCode) {
+            case 38://up
+                dir = e.keyCode;
+                break;
+            case 37://right
+                dir = e.keyCode;
+                break;
+            case 40://down
+                dir = e.keyCode;
+                break;
+            case 39://left
+                dir = e.keyCode;
+                break;
+        }
+        //update();
+        repaint();
+    });
+
+    function update() {
+        switch (dir) {
+            case 38://up
+                y -= 10
+                if (y < -50) { y = 350; }
+                break;
+            case 37://right
+                x -= 10
+                if (x < -50) { x = 550; }
+                break;
+            case 40://down
+                y += 10
+                if (y > 350) { y = 0; }
+                break;
+            case 39://left
+                x += 10
+                if (x > 550) { x = 0; }
+                break;
+        }
+
+        if (x < t_x + t_w && x + w > t_x && y < t_y + t_h && y + h > t_y) {
+            t_x = getRandomInt(40, 460);
+            t_y = getRandomInt(40, 260);
+        }
+
+        repaint();
+        window.requestAnimationFrame(update);
+    }
+
+    function repaint() {
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(255, 255, 255)";
+        ctx.fillRect(0, 0, 500, 300);
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, 40, 40);
+        ctx.strokeRect(x, y, 40, 40);
+        color = random_rgba();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#000";
+        ctx.fillRect(t_x, t_y, t_w, t_h);
+        ctx.closePath();
+    }
+
+    window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 60);
+            };
+    }());
+
+    window.requestAnimationFrame(update);
+</script>
+
+</html>
