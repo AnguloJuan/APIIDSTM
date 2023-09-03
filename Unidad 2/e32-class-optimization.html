@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>requestAnimationFrame</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000px" height="600px" style="border:1px solid #000000;">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    //dibujo de cuadrados
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#000";
+    var dir = 0;
+    var player, goal;
+    var walls = [];
+    var points = 0;
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
+
+    class Rectangule {
+        constructor(x, y, w, h, c) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.c = c;
+        }
+
+        repaintRect() {
+            ctx.beginPath();
+            ctx.fillStyle = this.c ? this.c : "#555";
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+            ctx.strokeRect(this.x, this.y, this.w, this.h);
+            ctx.closePath();
+        }
+
+        move() {
+            switch (dir) {
+                case 38://up
+                    this.y -= 10
+                    if (this.y < -50) { this.y = 650; }
+                    break;
+                case 37://right
+                    this.x -= 10
+                    if (this.x < -50) { this.x = 1050; }
+                    break;
+                case 40://down
+                    this.y += 10
+                    if (this.y > 650) { this.y = 0; }
+                    break;
+                case 39://left
+                    this.x += 10
+                    if (this.x > 1050) { this.x = 0; }
+                    break;
+            }
+        }
+
+        collision() {
+            switch (dir) {
+                case 38://up
+                    player.y += 10
+                    break;
+                case 37://right
+                    player.x += 10
+                    break;
+                case 40://down
+                    player.y -= 10
+                    break;
+                case 39://left
+                    player.x -= 10
+                    break;
+            }
+            dir = 0;
+        }
+
+        point() {
+            player.c = goal.c;
+            goal.x = getRandomInt(40, 960);
+            goal.y = getRandomInt(40, 560);
+            goal.c = random_rgba();
+            points += 1;
+        }
+    }
+
+    player = new Rectangule(250, 150, 40, 40, "#000");
+    goal = new Rectangule(400, 200, 50, 50, random_rgba());
+    walls.push(new Rectangule(60, 30, 40, 520));
+    walls.push(new Rectangule(500, 300, 200, 40));
+
+    document.addEventListener("keydown", (e) => {
+        switch (event.keyCode) {
+            case 38://up
+                dir = e.keyCode;
+                break;
+            case 37://right
+                dir = e.keyCode;
+                break;
+            case 40://down
+                dir = e.keyCode;
+                break;
+            case 39://left
+                dir = e.keyCode;
+                break;
+        }
+    });
+
+    function update() {
+        player.move();
+
+        repaint();
+
+        if (player.x < goal.x + goal.w && player.x + player.w > goal.x && player.y < goal.y + goal.h && player.y + player.h > goal.y) {
+            player.point();
+        }
+
+        player.repaintRect();
+        goal.repaintRect();
+
+        walls.forEach(rect => {
+            if (player.x < rect.x + rect.w && player.x + player.w > rect.x && player.y < rect.y + rect.h && player.y + player.h > rect.y) {
+                rect.collision();
+            }
+            rect.repaintRect();
+        });
+
+        window.requestAnimationFrame(update);
+    }
+
+    function repaint() {
+        //blank canvas
+        ctx.beginPath();
+        ctx.fillStyle = "rgb(255, 255, 255)";
+        ctx.fillRect(0, 0, 1000, 600);
+        ctx.closePath();
+
+        //paint points
+        ctx.beginPath();
+        ctx.font = "20px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+        ctx.fillStyle = "#000"
+        ctx.fillText("Points: " + points, 0, 18);
+        ctx.closePath();
+    }
+
+    window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 60);
+            };
+    }());
+
+    window.requestAnimationFrame(update);
+</script>
+
+</html>
