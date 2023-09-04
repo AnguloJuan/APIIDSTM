@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mario</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000px" height="670px" style="border:1px solid #000000; background-color: #B3EEFE">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
+
+    //lighter-or-darker-hex-color
+    const newShade = (hexColor, magnitude) => {
+        hexColor = hexColor.replace(`#`, ``);
+        if (hexColor.length === 6) {
+            const decimalColor = parseInt(hexColor, 16);
+            let r = (decimalColor >> 16) + magnitude;
+            r > 255 && (r = 255);
+            r < 0 && (r = 0);
+            let g = (decimalColor & 0x0000ff) + magnitude;
+            g > 255 && (g = 255);
+            g < 0 && (g = 0);
+            let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
+            b > 255 && (b = 255);
+            b < 0 && (b = 0);
+            return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
+        } else {
+            return hexColor;
+        }
+    };
+
+    var blocks = [];
+    class Block {
+        constructor(x, y, s) {
+            this.x = x;
+            this.y = y;
+            this.w = 50;
+            this.h = 50;
+            this.s = s;
+        }
+
+        paint() {
+            const x = this.x;
+            const y = this.y;
+            const w = this.w;
+            const h = this.h;
+            ctx.beginPath();
+            ctx.fillStyle = "#FF9063";
+            ctx.fillRect(x, y, w, h);
+            ctx.strokeRect(x, y, w, h);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(x + 5, y + 5, 4, 4);//top-left
+            ctx.fillRect(x + w - 10, y + 5, 4, 4);//top-right
+            ctx.fillRect(x + 5, y + h - 10, 4, 4);//bottom-left
+            ctx.fillRect(x + w - 10, y + h - 10, 4, 4);//bottom-right
+            if (this.s) {
+                ctx.font = "40px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+                ctx.fillStyle = "black";
+                ctx.fillText("?", x + (w / 2) - 8, y + 40);
+                ctx.fillStyle = "white";
+                ctx.fillText("?", x + (w / 2) - 10, y + 38);
+            }
+            ctx.closePath();
+        };
+    }
+    var platforms = [];
+    class Platform {
+        constructor(x, y, w, h, c) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.c = c;
+        }
+
+        paint() {
+            const x = this.x;
+            const y = this.y;
+            const w = this.w;
+            const h = this.h;
+
+            //shadow
+            ctx.beginPath();
+            ctx.fillStyle = "#000";
+            ctx.fillRect(x + 50, y + 30, w - 20, h - 20);
+            ctx.closePath();
+            //platform
+            ctx.beginPath();
+            ctx.fillStyle = this.c;
+            ctx.fillRect(x, y, w, h);
+            ctx.closePath();
+
+            //shadow-border
+            //bottom
+            ctx.beginPath();
+            ctx.fillStyle = newShade(this.c, -40);
+            ctx.fillRect(x, y + h - 5, w, 5);
+            ctx.fillStyle = "#BDD9E5";
+            ctx.closePath();
+            //right
+            ctx.beginPath();
+            ctx.fillStyle = newShade(this.c, -40);
+            ctx.fillRect(x + w - 5, y, 5, h);
+            ctx.fillStyle = "#BDD9E5";
+            ctx.closePath();
+
+            //nails
+            ctx.beginPath();
+            ctx.arc(x + 10, y + 10, 6, 0 * Math.PI, 2 * Math.PI);//top-left
+            ctx.moveTo(x + 7, y + 14);
+            ctx.lineTo(x + 14, y + 6);
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(x + w - 10, y + 10, 6, 0 * Math.PI, 2 * Math.PI);//top-right
+            ctx.moveTo(x + w - 14, y + 14);
+            ctx.lineTo(x + w - 7, y + 6);
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(x + 10, y + h - 10, 6, 0 * Math.PI, 2 * Math.PI);//bottom-left
+            ctx.moveTo(x + 14, y + h - 14);
+            ctx.lineTo(x + 7, y + h - 6);
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(x + w - 10, y + h - 10, 6, 0 * Math.PI, 2 * Math.PI);//bottom-right
+            ctx.moveTo(x + w - 7, y + h - 14);
+            ctx.lineTo(x + w - 14, y + h - 6);
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.strokeRect(x, y, w, h);
+        };
+    }
+
+    //block order left to right
+    blocks.push(new Block(50, 300));
+    blocks.push(new Block(250, 150, true));
+    blocks.push(new Block(301, 150));
+    blocks.push(new Block(800, 250, true));
+    //platforms order left to right
+    blocks.push(new Platform(300, 350, 150, 250, "#84C0FF"));
+    blocks.push(new Platform(200, 450, 150, 150, "#FFC3B8"));
+    blocks.push(new Platform(800, 450, 350, 150, "#51D96B"));
+
+    blocks.forEach(block => {
+        block.paint();
+    });
+    platforms.forEach(platform => {
+        platform.paint();
+    });
+
+    //bush
+    ctx.beginPath();
+    ctx.fillStyle = "#266816";
+    ctx.arc(95, 572, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(125, 592, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(95, 602, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(65, 592, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "#4BD372";
+    ctx.arc(90, 570, 30, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(120, 590, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(90, 600, 20, 0 * Math.PI, 2 * Math.PI);
+    ctx.arc(60, 590, 25, 0 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+
+    //pipe
+    //top
+    ctx.beginPath();
+    ctx.fillStyle = "#21840C";
+    ctx.fillRect(600, 460, 98, 40);
+    ctx.strokeRect(600, 460, 98, 40);
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "#58CC68";
+    ctx.fillRect(605, 461, 3, 38);
+    ctx.fillRect(611, 461, 7, 38);
+    ctx.fillRect(624, 461, 2, 38);
+    ctx.fillRect(675, 461, 2, 38);
+    ctx.fillStyle = "#050505";
+    ctx.fillRect(679, 461, 3, 38);
+    ctx.fillRect(684, 461, 1, 38);
+    ctx.fillRect(688, 461, 6, 38);
+    ctx.fillRect(688, 461, 6, 38);
+    ctx.fillRect(695, 461, 3, 38);
+    ctx.closePath();
+
+    //bottom
+    ctx.beginPath();
+    ctx.fillStyle = "#21840C";
+    ctx.fillRect(603, 500, 92, 100);
+    ctx.strokeRect(603, 500, 92, 100);
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "#58CC68";
+    ctx.fillRect(608, 501, 3, 98);
+    ctx.fillRect(614, 501, 7, 98);
+    ctx.fillRect(627, 501, 2, 98);
+    ctx.fillRect(671, 501, 2, 98);
+    ctx.fillStyle = "#050505";
+    ctx.fillRect(675, 501, 3, 98);
+    ctx.fillRect(679, 501, 1, 98);
+    ctx.fillRect(684, 501, 6, 98);
+    ctx.fillRect(684, 501, 6, 98);
+    ctx.fillRect(690, 501, 3, 98);
+    ctx.closePath();
+
+    //floor
+    ctx.beginPath();
+    ctx.fillStyle = "#EDCBB8";
+    ctx.fillRect(-1, 600, 1002, 25);
+    ctx.strokeRect(-1, 600, 1002, 25);
+    ctx.fillStyle = "#E79660";
+    ctx.fillRect(-1, 626, 1002, 60);
+    ctx.closePath();
+    //floor-lines
+    for (let i = 0; i < 32; i++) {
+        ctx.beginPath();
+        ctx.strokeStyle = "#FBCAC6";
+        ctx.lineWidth = 8;
+        ctx.moveTo(0 + i * 34, 626);
+        ctx.lineTo(15 + i * 34, 633);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.strokeStyle = "#220000";
+        ctx.lineWidth = 5;
+        ctx.moveTo(5 + i * 34, 635);
+        ctx.lineTo(70 + i * 34, 675);
+        ctx.stroke();
+        ctx.closePath();
+    }
+</script>
+
+</html>
