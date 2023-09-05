@@ -58,7 +58,7 @@
                     this.y -= speed;
                     if (this.y < -50) { this.y = 650; }
                     break;
-                case 37://right
+                case 37://left
                     this.x -= speed;
                     if (this.x < -50) { this.x = 1050; }
                     break;
@@ -66,26 +66,26 @@
                     this.y += speed;
                     if (this.y > 650) { this.y = 0; }
                     break;
-                case 39://left
+                case 39://right
                     this.x += speed;
                     if (this.x > 1050) { this.x = 0; }
                     break;
             }
         }
 
-        collision() {
+        collision(rect) {
             switch (dir) {
-                case 38://up
-                    player.y += 12
+                case 38://bottom
+                    player.y = rect.y + rect.h;
                     break;
-                case 37://right
-                    player.x += 12
+                case 37://left
+                    player.x = rect.x + rect.w;
                     break;
-                case 40://down
-                    player.y -= 12
+                case 40://top
+                    player.y = rect.y - 40;
                     break;
-                case 39://left
-                    player.x -= 12
+                case 39://right
+                    player.x = rect.x - 40;
                     break;
             }
             dir = 0;
@@ -128,6 +128,19 @@
                 break;
             case 27://pause-esc
                 pause = !pause;
+                //pause screen
+                ctx.beginPath();
+                ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+                ctx.fillRect(0, 0, 1000, 600);
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.font = "40px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+                ctx.fillStyle = "#fff"
+                ctx.fillText("Pause", 450, 260);
+                ctx.font = "20px Segoe UI";
+                ctx.fillText("Press Esc to unpause", 420, 300);
+                ctx.closePath();
                 break;
         }
     });
@@ -146,24 +159,10 @@
 
             walls.forEach(rect => {
                 if (player.x < rect.x + rect.w && player.x + player.w > rect.x && player.y < rect.y + rect.h && player.y + player.h > rect.y) {
-                    rect.collision();
+                    rect.collision(rect);
                 }
                 rect.repaintRect();
             });
-        } else {
-            //pause screen
-            ctx.beginPath();
-            ctx.fillStyle = "rgba(0, 0, 0, 0.002)";
-            ctx.fillRect(0, 0, 1000, 600);
-            ctx.closePath();
-
-            ctx.beginPath();
-            ctx.font = "40px Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
-            ctx.fillStyle = "#fff"
-            ctx.fillText("Pause", 450, 260);
-            ctx.font = "20px Segoe UI";
-            ctx.fillText("Press Esc to unpause", 420, 300);
-            ctx.closePath();
         }
 
         window.requestAnimationFrame(update);
