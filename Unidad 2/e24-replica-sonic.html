@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paisaje</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000px" height="560px" style="background-color: #2000A0">
+        Your browser does not support the canvas tag.
+    </canvas>
+</body>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#000"
+    var grd;
+
+    //palma 1
+    //hoja derecha 3
+    ctx.beginPath();
+    ctx.fillStyle = "#80E000"
+    ctx.moveTo(0, 100);
+    ctx.lineTo(30, 150);
+    ctx.lineTo(50, 200);
+    ctx.lineTo(50, 204);
+    ctx.lineTo(30, 200);
+    ctx.lineTo(20, 190);
+    ctx.lineTo(15, 185);
+    ctx.lineTo(0, 155);
+    ctx.lineTo(-10, 100);
+    ctx.fill();
+    ctx.closePath();
+    //hoja derecha 2
+    ctx.beginPath();
+    ctx.moveTo(0, 105);
+    ctx.lineTo(30, 95);
+    ctx.lineTo(70, 101);
+    ctx.lineTo(80, 115);
+    ctx.lineTo(90, 155);
+    ctx.lineTo(60, 129);
+    ctx.lineTo(30, 115);
+    ctx.lineTo(0, 115);
+    ctx.fill();
+    ctx.closePath();
+    //hoja derecha 1
+    ctx.beginPath();
+    ctx.moveTo(0, 105);
+    ctx.lineTo(0, 100);
+    ctx.lineTo(30, 70);
+    ctx.lineTo(70, 74);
+    ctx.lineTo(120, 90);
+    ctx.lineTo(100, 100);
+    ctx.lineTo(60, 104);
+    ctx.lineTo(30, 110);
+    ctx.lineTo(0, 105);
+    ctx.fill();
+    ctx.closePath();
+   
+
+    //palma 2
+    //tronco
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(128,64,0)"
+    ctx.fillRect(692, 100, 15, 410);
+    ctx.fill();
+    ctx.closePath();
+    //hoja derecha 3
+    ctx.beginPath();
+    ctx.fillStyle = "#80E000"
+    ctx.moveTo(700, 100);
+    ctx.lineTo(730, 150);
+    ctx.lineTo(750, 200);
+    ctx.lineTo(750, 204);
+    ctx.lineTo(730, 200);
+    ctx.lineTo(720, 190);
+    ctx.lineTo(715, 185);
+    ctx.lineTo(700, 155);
+    ctx.lineTo(690, 100);
+    ctx.fill();
+    ctx.closePath();
+    //hoja derecha 2
+    ctx.beginPath();
+    ctx.moveTo(700, 105);
+    ctx.lineTo(730, 95);
+    ctx.lineTo(770, 101);
+    ctx.lineTo(780, 115);
+    ctx.lineTo(790, 155);
+    ctx.lineTo(760, 129);
+    ctx.lineTo(730, 115);
+    ctx.lineTo(700, 115);
+    ctx.fill();
+    ctx.closePath();
+    //hoja derecha 1
+    ctx.beginPath();
+    ctx.moveTo(700, 105);
+    ctx.lineTo(700, 100);
+    ctx.lineTo(730, 70);
+    ctx.lineTo(770, 74);
+    ctx.lineTo(820, 90);
+    ctx.lineTo(800, 100);
+    ctx.lineTo(760, 104);
+    ctx.lineTo(730, 110);
+    ctx.lineTo(700, 105);
+    ctx.fill();
+    ctx.closePath();
+    //hoja izquierda 3
+    ctx.beginPath();
+    ctx.moveTo(700, 110);
+    ctx.lineTo(700, 105);
+    ctx.lineTo(670, 100);
+    ctx.lineTo(650, 121);
+    ctx.lineTo(640, 135);
+    ctx.lineTo(644, 155);
+    ctx.lineTo(660, 165);
+    ctx.lineTo(675, 155);
+    ctx.lineTo(700, 110);
+    ctx.fill();
+    ctx.closePath();
+    //hoja izquierda 2
+    ctx.beginPath();
+    ctx.moveTo(700, 105);
+    ctx.lineTo(670, 95);
+    ctx.lineTo(630, 101);
+    ctx.lineTo(620, 115);
+    ctx.lineTo(610, 155);
+    ctx.lineTo(640, 129);
+    ctx.lineTo(670, 115);
+    ctx.lineTo(700, 105);
+    ctx.fill();
+    ctx.closePath();
+    //hoja izquierda 1
+    ctx.beginPath();
+    ctx.moveTo(700, 105);
+    ctx.lineTo(700, 100);
+    ctx.lineTo(670, 80);
+    ctx.lineTo(630, 86);
+    ctx.lineTo(590, 110);
+    ctx.lineTo(570, 150);
+    ctx.lineTo(640, 114);
+    ctx.lineTo(670, 110);
+    ctx.lineTo(700, 105);
+    ctx.fill();
+    ctx.closePath();
+
+    //girasol
+    //tallo
+    ctx.beginPath();
+    ctx.fillStyle = "#40A000"
+    ctx.fillRect(892, 320, 8, 100);
+    ctx.fill();
+    ctx.closePath();
+    //flor
+    ctx.beginPath();
+    ctx.fillStyle = "#E0E000"
+    ctx.arc(895, 320, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+    //centro
+    ctx.beginPath();
+    ctx.fillStyle = "#406040"
+    ctx.arc(895, 320, 14, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+
+    //cuadros
+    ctx.beginPath();
+    for (let j = 0; j < 4; j++) {
+        for (let i = 0; i < 18; i++) {
+            if (j % 2 == 0) {
+                ctx.fillStyle = "#C06000"
+                ctx.fillRect(0 + 60 * i, 440 + 30 * j, 30, 30);
+                ctx.fillStyle = "#602000"
+                ctx.fillRect(30 + 60 * i, 440 + 30 * j, 30, 30);
+            } else {
+                ctx.fillStyle = "#C06000"
+                ctx.fillRect(30 + 60 * i, 440 + 30 * j, 30, 30);
+                ctx.fillStyle = "#602000"
+                ctx.fillRect(0 + 60 * i, 440 + 30 * j, 30, 30);
+            }
+        }
+    }
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0,0,0,0.4)"
+    ctx.fillRect(-1, 448, 1002, 35);
+    ctx.closePath();
+
+    //lineas de tierra
+    ctx.beginPath();
+    ctx.fillStyle = "#80E000"
+    ctx.fillRect(-1, 400, 1002, 20);
+    ctx.fillStyle = "#40A000"
+    ctx.fillRect(-1, 416, 1002, 16);
+    ctx.fillStyle = "#006000"
+    ctx.fillRect(-1, 432, 1002, 16);
+    ctx.closePath();
+
+    //anillos
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#FFFF00"
+    ctx.arc(150, 340, 14, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(200, 340, 14, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(250, 340, 14, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+</script>
+
+</html>
