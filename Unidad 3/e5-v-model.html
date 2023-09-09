@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>v-model</title>
+</head>
+
+<body class="h-full bg-gray-900">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app" class="flex min-h-full flex-col justify-center align-center mt-10 mx-auto max-w-sm text-white gap-3">
+        <label for="message" class="block text-sm font-medium leading-6 text-xl">
+            Bienvenido: {{ message }}
+        </label for="message">
+        <input id="message" v-model="message" placeholder="Ingresa tu nombre"
+            class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in" />
+
+        <input v-model="num1" placeholder="Ingresa el numero 1" type="number"
+            class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in" />
+        <input v-model="num2" placeholder="Ingresa el numero 2" type="number"
+            class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in" />
+        <button @click="suma = num1+num2"
+            class="font-semibold align-center leading-6 hover:bg-blue-900 bg-blue-800 rounded-md p-2">
+            Suma
+        </button>
+        <p class="text-2xl">La suma es: {{ suma }}</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const message = ref('')
+                return {
+                    count: ref(0),
+                    message,
+                    num1: ref(0),
+                    num2: ref(0),
+                    suma: ref(0)
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
