@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>v-model</title>
+</head>
+
+<body class="h-full bg-gray-900">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app" class="flex min-h-full flex-col justify-center align-center mt-10 mx-auto max-w-sm text-white gap-3">
+        <h1 for="message" class="block text-sm font-medium leading-6 text-xl">
+            Bienvenido: {{ message }}
+        </h1>
+        <ul>
+            <li>Name - Lastname</li>
+            <li v-for="person in persons">{{person.name}} {{person.lastname}}</li>
+        </ul>
+
+        <form action=""
+            class="flex flex-col justify-center align-center mt-2 gap-3">
+            <fieldset>
+                <legend>
+                    Nombre
+                </legend>
+                <input type="text" name="" id="" v-model="username"
+                    class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Apellido
+                </legend>
+                <input type="text" name="" id="" v-model="lastname"
+                    class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+            </fieldset>
+            <button type="button" v-on:click="addPerson"
+                class="font-semibold align-center leading-6 hover:bg-blue-900 bg-blue-800 rounded-md p-2">
+                Add person
+            </button>
+        </form>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const message = ref('')
+                const username = ref(''), lastname = ref('')
+                const persons = ref([]);
+
+                return {
+                    count: ref(0),
+                    message,
+                    num1: ref(0),
+                    num2: ref(0),
+                    suma: ref(0),
+                    username,
+                    lastname,
+                    persons
+                }
+            },
+            methods: {
+                addPerson() {
+                    const person = {
+                        name: this.username,
+                        lastname: this.lastname,
+                    }
+                    this.persons.push(person);
+                    console.log(this.username, this.lastname);
+                }
+            }
+
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
