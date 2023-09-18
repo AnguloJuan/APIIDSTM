@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>json-fetch</title>
+</head>
+
+<body class="h-full bg-gray-900">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <div id="app" class="flex min-h-full flex-col justify-center align-center mt-10 mx-auto max-w-sm text-white gap-3">
+        <h1 class="text-xl font-bold self-center">Log In</h1>
+        <form action="" class="flex flex-col justify-center align-center mt-2 gap-3">
+            <fieldset>
+                <legend>Email: </legend>
+                <input type="email" placeholder="Type you email" v-model="email"
+                    class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+            </fieldset>
+            <fieldset>
+                <legend>Password: </legend>
+                <input type="password" placeholder="Type you password" v-model="password"
+                    class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+            </fieldset>
+            <button type="button" v-on:click="login"
+                class="font-semibold align-center leading-6 hover:bg-blue-900 bg-blue-800 rounded-md p-2 mt-4">
+                Log In
+            </button>
+        </form>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const email = ref('');
+                const password = ref('');
+                const users = ref([]);
+                const logIn = false;
+
+                return {
+                    email,
+                    password,
+                }
+            },
+            methods: {
+                async login() {
+                    //fetch data
+                    const res = await fetch("users.json");
+                    const users = await res.json();
+                    //go over the array
+                    users.forEach((user) => {
+                        if (user.email == this.email && user.password == this.password) {
+                            this.logIn = true
+                        }
+                    })
+                    this.logIn ? alert("Log In") : alert("Email or Password incorrect");
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
