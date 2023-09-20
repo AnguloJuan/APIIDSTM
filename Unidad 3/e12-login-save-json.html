@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>login-save-show</title>
+</head>
+
+<body class="h-full bg-gray-900">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <div id="app" class="flex min-h-full flex-col justify-center align-center mt-10 mx-auto max-w-sm text-white gap-3">
+        <div id="form-container" v-if="isLogIn == 'false'">
+            <h2 class="text-xl font-bold self-center">Log In</h2>
+            <form action="" class="flex flex-col justify-center align-center mt-2 gap-3">
+                <fieldset>
+                    <legend>Email: </legend>
+                    <input type="email" placeholder="Type you email" v-model="email"
+                        class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                </fieldset>
+                <fieldset>
+                    <legend>Password: </legend>
+                    <input type="password" placeholder="Type you password" v-model="password"
+                        class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                </fieldset>
+                <button type="button" v-on:click="login"
+                    class="font-semibold align-center hover:bg-blue-900 bg-blue-800 rounded-md p-2 mt-4">
+                    Log In
+                </button>
+            </form>
+        </div>
+
+        <div id="users-container" v-else>
+            <div v-on:click="logOut" class="w-fit flex flex-row cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path
+                        d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06Z"
+                        fill="white"></path>
+                </svg>
+                <button type="button" class="font-semibold ml-2">
+                    Log Out
+                </button>
+            </div>
+
+            <hr class="border-1 border-gray-100 mt-2">
+
+            <h1 class="text-xl font-bold text-center my-3">Dashboard</h1>
+            <h2 class="text-xl font-bold my-3">Users</h2>
+
+            <div v-on:click="addUser = true"
+                class="w-fit flex flex-row cursor-pointer p-2 mt-4 font-semibold align-center hover:bg-green-800 bg-green-700 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path
+                        d="M11.75 4.5a.75.75 0 0 1 .75.75V11h5.75a.75.75 0 0 1 0 1.5H12.5v5.75a.75.75 0 0 1-1.5 0V12.5H5.25a.75.75 0 0 1 0-1.5H11V5.25a.75.75 0 0 1 .75-.75Z"
+                        fill="white"></path>
+                </svg>
+                <button type="button" class="mx-1">
+                    Add new user
+                </button>
+            </div>
+
+            <form action="" v-if="addUser">
+                <fieldset class="flex flex-col justify-center align-center mt-2 gap-3">
+                    <legend>Name: </legend>
+                    <input type="text" placeholder="Type you name" v-model="name"
+                        class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                    <legend>Email: </legend>
+                    <input type="email" placeholder="Type you email" v-model="email"
+                        class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                    <legend>Age: </legend>
+                    <input type="number" placeholder="Type you age" v-model="age"
+                        class="block w-full rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                    <button type="submit" v-on:click="addUser, addUser = false "
+                        class="font-semibold align-center hover:bg-blue-900 bg-blue-800 rounded-md p-2 mt-4">
+                        Save
+                    </button>
+                </fieldset>
+            </form>
+
+            <table class="w-full mt-3 table-auto border-collapse border border-slate-500">
+                <thead class="bg-slate-700">
+                    <tr>
+                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Name</th>
+                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Email</th>
+                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Birthday </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users">
+                        <td class="border border-slate-700 p-4 text-slate-400">{{user.name}}</td>
+                        <td class="border border-slate-700 p-4 text-slate-400">{{user.email}}</td>
+                        <td class="border border-slate-700 p-4 text-slate-400">{{user.birthday}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const email = ref('');
+                const password = ref('');
+                let users = ref([]);
+                let isLogIn = ref('');
+                const addUser = ref(false);
+
+                if (localStorage.getItem("isLogIn") == null) {
+                    localStorage.setItem("isLogIn", false);
+                }
+                isLogIn = localStorage.getItem("isLogIn");
+
+                return {
+                    email,
+                    password,
+                    isLogIn,
+                    users,
+                    addUser,
+                }
+            },
+            mounted: function () {
+                getUsers = async () => {
+                    //fetch data
+                    fetch("users.json", { cache: "no-cache" })
+                        .then(res => res.json())
+                        .then(data => {
+                            this.users = data;
+                        })
+                }
+                if (this.isLogIn) {
+                    getUsers();
+                }
+            },
+            methods: {
+                async login() {
+                    //fetch data
+                    const res = await fetch("users.json");
+                    const users = await res.json();
+                    //go over the array
+                    users.forEach((user) => {
+                        if (user.email == this.email && user.password == this.password) {
+                            this.isLogIn = 'true';
+                            localStorage.setItem("isLogIn", this.isLogIn);
+                            this.users = user.users;
+                            location.reload();
+                        }
+                    })
+                    this.isLogIn == 'true' ? alert("Log In") : alert("Email or Password incorrect");
+                },
+                logOut() {
+                    localStorage.removeItem("isLogIn");
+                    this.isLogIn = 'false';
+                    location.reload();
+                },
+                addUser() {
+                    this.users.push({
+                        name: "New User",
+                        email: "",
+                        birthday: 0,
+                    })
+                },
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

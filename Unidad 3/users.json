@@ -14,5 +14,33 @@
         "password": "12345",
         "birthday": "31/03/98",
         "rol": "profesor"
+    },
+    {
+        "name": "Maria",
+        "lastname": "Garcia",
+        "email": "mar@gmail.com",
+        "birthday": "16/12/99",
+        "rol": "estudiante"
+    },
+    {
+        "name": "Luis",
+        "lastname": "Perez",
+        "email": "lui@gmail.com",
+        "birthday": "12/03/01",
+        "rol": "estudiante"
+    },
+    {
+        "name": "Ana",
+        "lastname": "Gonzalez",
+        "email": "ana@gmail.com",
+        "birthday": "10/06/02",
+        "rol": "estudiante"
+    },
+    {
+        "name": "Jose",
+        "lastname": "Hernandez",
+        "email": "jos@gmail.com",
+        "birthday": "21/01/92",
+        "rol": "profesor"
     }
 ]
