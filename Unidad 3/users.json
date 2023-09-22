@@ -4,43 +4,43 @@
         "lastname": "Angulo",
         "email": "jua4_20@alu.uabcs.mx",
         "password": "1234",
-        "birthday": "10/06/02",
-        "rol": "estudiante"
+        "age": "21",
+        "role": "estudiante"
     },
     {
         "name": "Pedro",
         "lastname": "Ramirez",
         "email": "pepeRa@gmail.com",
         "password": "12345",
-        "birthday": "31/03/98",
-        "rol": "profesor"
+        "age": "25",
+        "role": "profesor"
     },
     {
         "name": "Maria",
         "lastname": "Garcia",
         "email": "mar@gmail.com",
-        "birthday": "16/12/99",
-        "rol": "estudiante"
+        "age": "24",
+        "role": "estudiante"
     },
     {
         "name": "Luis",
         "lastname": "Perez",
         "email": "lui@gmail.com",
-        "birthday": "12/03/01",
-        "rol": "estudiante"
+        "age": "22",
+        "role": "estudiante"
     },
     {
         "name": "Ana",
         "lastname": "Gonzalez",
         "email": "ana@gmail.com",
-        "birthday": "10/06/02",
-        "rol": "estudiante"
+        "age": "21",
+        "role": "estudiante"
     },
     {
         "name": "Jose",
         "lastname": "Hernandez",
         "email": "jos@gmail.com",
-        "birthday": "21/01/92",
-        "rol": "profesor"
+        "age": "31",
+        "role": "profesor"
     }
 ]
