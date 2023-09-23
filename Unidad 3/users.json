@@ -1,46 +1,56 @@
 [
     {
+        "id": "1",
         "name": "Juan",
         "lastname": "Angulo",
         "email": "jua4_20@alu.uabcs.mx",
         "password": "1234",
         "age": "21",
-        "role": "estudiante"
+        "role": "Student"
     },
     {
+        "id": "2",
         "name": "Pedro",
         "lastname": "Ramirez",
         "email": "pepeRa@gmail.com",
         "password": "12345",
         "age": "25",
-        "role": "profesor"
+        "role": "Teacher"
     },
     {
+        "id": "3",
         "name": "Maria",
         "lastname": "Garcia",
         "email": "mar@gmail.com",
+        "password": "1234",
         "age": "24",
-        "role": "estudiante"
+        "role": "Student"
     },
     {
+        "id": "4",
         "name": "Luis",
         "lastname": "Perez",
         "email": "lui@gmail.com",
+        "password": "1234",
         "age": "22",
-        "role": "estudiante"
+        "role": "Student"
     },
     {
+        "id": "5",
         "name": "Ana",
         "lastname": "Gonzalez",
         "email": "ana@gmail.com",
+        "password": "1234",
         "age": "21",
-        "role": "estudiante"
+        "role": "Student"
     },
     {
+        "id": "6",
         "name": "Jose",
         "lastname": "Hernandez",
         "email": "jos@gmail.com",
+        "password": "12345",
         "age": "31",
-        "role": "profesor"
+        "role": "Teacher"
     }
 ]
