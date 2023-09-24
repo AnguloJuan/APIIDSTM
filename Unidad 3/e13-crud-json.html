@@ -87,11 +87,11 @@
                         <option value="Teacher">Teacher</option>
                     </select>
                     <div class="flex flex-row gap-3">
-                        <button type="button" v-on:click=""
+                        <button type="button" v-on:click="addUser(user)"
                             class="w-full font-semibold align-center hover:bg-green-800 bg-green-700 rounded-md p-2 my-4">
                             Save
                         </button>
-                        <button type="button" v-on:click=""
+                        <button type="button" v-on:click="add = false"
                             class="w-full font-semibold align-center hover:bg-red-900 bg-red-800 rounded-md p-2 my-4">
                             Cancel
                         </button>
@@ -102,48 +102,71 @@
             <table class="w-full mt-3 table-auto border-collapse border border-slate-500">
                 <thead class="bg-slate-700">
                     <tr>
-                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Name</th>
-                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Email</th>
-                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">age</th>
-                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Role</th>
-                        <th class="w-1/2 border border-slate-600 font-semibold p-4 text-slate-200 text-left">Actions</th>
+                        <th
+                            class="w-1/2 border border-slate-600 font-semibold p-4 text-center text-slate-200 text-left">
+                            Name</th>
+                        <th
+                            class="w-1/2 border border-slate-600 font-semibold p-4 text-center text-slate-200 text-left">
+                            Email</th>
+                        <th
+                            class="w-1/2 border border-slate-600 font-semibold p-4 text-center text-slate-200 text-left">
+                            age</th>
+                        <th
+                            class="w-1/2 border border-slate-600 font-semibold p-4 text-center text-slate-200 text-left">
+                            Role</th>
+                        <th
+                            class="w-1/2 border border-slate-600 font-semibold p-4 text-center text-slate-200 text-left">
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in users">
                         <td class="border border-slate-700 text-slate-400">
                             <input type="text" placeholder="Type the users name" v-model="user.name"
-                                class="block rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-transparent focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
-                                :style="{ width: (24 + user.name.length * 12) + 'px' }">
+                                class="block rounded-md border-1 px-1 py-1.5 shadow-sm border-1 bg-transparent focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
+                                :style="{ width: (9 + user.name.length * 9) + 'px' }">
                             <input type="text" placeholder="Type the users Last name" v-model="user.lastname"
-                                class="block rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-transparent focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
-                                :style="{ width: (24 + user.name.length * 12) + 'px' }">
+                                class="block rounded-md border-1 px-1 py-1.5 shadow-sm border-1 bg-transparent focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
+                                :style="{ width: (9 + user.lastname.length * 9) + 'px' }">
                         </td>
-                        <td class="border border-slate-700 p-4 text-slate-400">
+                        <td class="border border-slate-700 text-slate-400">
                             <input type="email" placeholder="Type the users email" v-model="user.email"
-                                class="block rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-transparent border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                                class="block rounded-md border-1 px-1 py-1.5 shadow-sm border-1 bg-transparent border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
+                                :style="{ width: (10 + user.email.length * 9) + 'px' }">
                         </td>
-                        <td class="border border-slate-700 p-4 text-slate-400">
+                        <td class="border border-slate-700 text-slate-400">
                             <input type="number" placeholder="Type the users age" v-model="user.age"
-                                class="block rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-transparent border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                                class="block rounded-md border-1 px-1 py-1.5 shadow-sm border-1 bg-transparent border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
+                                :style="{ width: 3 + 'rem' }">
                         </td>
-                        <td class="border border-slate-700 p-4 text-slate-400">
+                        <td class="border border-slate-700 text-slate-400">
                             <select name="role" id="role" v-model="user.role"
-                                class="block rounded-md border-1 px-3 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in">
+                                class="block rounded-md border-1 px-1 py-1.5 shadow-sm border-1 bg-gray-800 border-gray-100 focus:border-2 focus:border-inset focus:border-indigo-600 focus:outline-0 transition-color transition ease-in"
+                                :style="{ width: 5.1 + 'rem' }">
                                 <option disabled value="">Select the users role</option>
                                 <option value="Student">Student</option>
                                 <option value="Teacher">Teacher</option>
                             </select>
                         </td>
+
                         <td class="border border-slate-700 p-4 text-slate-400">
                             <div class="flex flex-row gap-1">
-                                <button type="button" v-on:click="addUser(user)"
+                                <button type="button" v-on:click="editUser(user.id)"
                                     class="w-full font-semibold text-white align-center hover:bg-green-800 bg-green-700 rounded-md p-2">
-                                    Edit
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="white"
+                                            d="M17.263 2.177a1.75 1.75 0 0 1 2.474 0l2.586 2.586a1.75 1.75 0 0 1 0 2.474L19.53 10.03l-.012.013L8.69 20.378a1.753 1.753 0 0 1-.699.409l-5.523 1.68a.748.748 0 0 1-.747-.188.748.748 0 0 1-.188-.747l1.673-5.5a1.75 1.75 0 0 1 .466-.756L14.476 4.963ZM4.708 16.361a.26.26 0 0 0-.067.108l-1.264 4.154 4.177-1.271a.253.253 0 0 0 .1-.059l10.273-9.806-2.94-2.939-10.279 9.813ZM19 8.44l2.263-2.262a.25.25 0 0 0 0-.354l-2.586-2.586a.25.25 0 0 0-.354 0L16.061 5.5Z">
+                                        </path>
+                                    </svg>
                                 </button>
-                                <button type="button" v-on:click="add = false"
+                                <button type="button" v-on:click="deleteUser(user.id)"
                                     class="w-full font-semibold text-white align-center hover:bg-red-900 bg-red-800 rounded-md p-2">
-                                    Delete
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="white"
+                                            d="M4.5 12.75a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 0 1.5H5.25a.75.75 0 0 1-.75-.75Z">
+                                        </path>
+                                    </svg>
                                 </button>
                             </div>
                         </td>
@@ -211,7 +234,15 @@
                             this.users = users;
                         }
                     })
-                    this.isLogIn ? alert("Log In") : alert("Email or Password incorrect");
+                    this.isLogIn ? Swal.fire({
+                        title: 'Log In!',
+                        icon: 'success'
+                    }
+                    ) : Swal.fire({
+                        title: 'Error!',
+                        text: 'Wrong email or password',
+                        icon: 'error'
+                    });
                 },
                 logOut() {
                     localStorage.setItem("isLogIn", false);
@@ -221,13 +252,14 @@
                     if (user.name == '' || user.lastname == '' || user.userEmail == '' || user.userPassword == '' || user.age == '' || user.role == '') {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: 'Error',
                             text: 'Please fill all the fields',
                         })
                         return;
                     }
                     this.add = false;
                     this.users.push({
+                        id: this.users.length + 1,
                         name: user.name,
                         lastname: user.lastname,
                         email: user.userEmail,
@@ -236,6 +268,64 @@
                         role: user.role,
                     })
                 },
+                editUser(id) {
+                    const user = this.users.find(user => user.id == id);
+                    if (user.name == '' || user.lastname == '' || user.email == '' || user.password == '' || user.age == '' || user.role == '') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Please fill all the fields',
+                        })
+                        return;
+                    }
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#60A5FA',
+                        cancelButtonColor: '#EF4444',
+                        confirmButtonText: 'Yes, update it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Updated!',
+                                'User has been updated.',
+                                'success'
+                            )
+                            this.users = this.users.map(user => {
+                                if (user.id == id) {
+                                    user.name = user.name;
+                                    user.lastname = user.lastname;
+                                    user.email = user.email;
+                                    user.password = user.password;
+                                    user.age = user.age;
+                                    user.role = user.role;
+                                }
+                                return user;
+                            })
+                        }
+                    })
+                },
+                deleteUser(id) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#60A5FA',
+                        cancelButtonColor: '#EF4444',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.users = this.users.filter(user => user.id != id);
+                            Swal.fire(
+                                'Deleted!',
+                                'User has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                }
             }
         }).mount('#app')
     </script>
